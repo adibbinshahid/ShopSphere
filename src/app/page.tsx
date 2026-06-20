@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, ShieldCheck, Truck, Award, Headphones, Star, ChevronRight } from 'lucide-react';
@@ -38,12 +38,12 @@ export default function HomePage() {
         <div className="bg-white rounded-3xl overflow-hidden relative min-h-[440px] sm:min-h-[480px] lg:min-h-[520px] flex items-center shadow-sm border border-gray-100">
           {/* Content */}
           <div className="relative z-10 px-8 sm:px-12 lg:px-16 py-10 max-w-lg translate-x-[30px]">
-            <motion.div
+            <m.div
               initial="hidden"
               animate="show"
               variants={{ show: { transition: { staggerChildren: 0.12 } } }}
             >
-              <motion.h1
+              <m.h1
                 variants={fadeUp}
                 className="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-950 leading-[1.05] tracking-tight"
               >
@@ -52,32 +52,32 @@ export default function HomePage() {
                 Shop.
                 <br />
                 <span className="text-purple-600">Enjoy.</span>
-              </motion.h1>
-              <motion.p variants={fadeUp} className="mt-5 text-gray-500 text-base sm:text-lg leading-relaxed">
+              </m.h1>
+              <m.p variants={fadeUp} className="mt-5 text-gray-500 text-base sm:text-lg leading-relaxed">
                 Premium products.<br />
                 Smart choices.<br />
                 Better life.
-              </motion.p>
-              <motion.div variants={fadeUp} className="mt-8">
+              </m.p>
+              <m.div variants={fadeUp} className="mt-8">
                 <Link
                   href="/shop"
                   className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-7 py-4 rounded-2xl font-semibold text-sm transition-all duration-200 shadow-lg shadow-purple-200 hover:shadow-purple-300 hover:gap-3"
                 >
                   Shop Now <ArrowRight size={16} />
                 </Link>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           </div>
 
           {/* Hero Carousel */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="absolute right-0 top-0 bottom-0 w-1/2 lg:w-3/5"
           >
             <HeroCarousel />
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
@@ -86,7 +86,7 @@ export default function HomePage() {
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm">
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-gray-100">
             {trustBadges.map(({ icon: Icon, title, sub }, i) => (
-              <motion.div
+              <m.div
                 key={i}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ export default function HomePage() {
                   <p className="text-sm font-bold text-gray-900">{title}</p>
                   <p className="text-xs text-gray-500">{sub}</p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -109,7 +109,7 @@ export default function HomePage() {
 
       {/* ── Top Categories ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -119,10 +119,10 @@ export default function HomePage() {
           <Link href="/categories" className="text-purple-600 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
             View All <ChevronRight size={14} />
           </Link>
-        </motion.div>
+        </m.div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {categories.map((cat, i) => (
-            <motion.div
+            <m.div
               key={cat.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -130,7 +130,7 @@ export default function HomePage() {
               transition={{ delay: i * 0.08 }}
             >
               <Link href={`/categories?cat=${encodeURIComponent(cat.name)}`}>
-                <motion.div
+                <m.div
                   whileHover={{ y: -4, scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                   className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-shadow cursor-pointer"
@@ -140,6 +140,8 @@ export default function HomePage() {
                       src={categoryImages[cat.name] ?? ''}
                       alt={cat.name}
                       fill
+                      sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 240px"
+                      priority={i < 2}
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
@@ -147,16 +149,16 @@ export default function HomePage() {
                     <span className="text-sm font-semibold text-gray-900">{cat.name}</span>
                     <ArrowRight size={14} className="text-purple-600 group-hover:translate-x-1 transition-transform" />
                   </div>
-                </motion.div>
+                </m.div>
               </Link>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </section>
 
       {/* ── Featured Products ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-12">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -169,7 +171,7 @@ export default function HomePage() {
           <Link href="/shop" className="text-purple-600 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
             View All <ChevronRight size={14} />
           </Link>
-        </motion.div>
+        </m.div>
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {featured.map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
@@ -179,7 +181,7 @@ export default function HomePage() {
 
       {/* ── Banner ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -202,12 +204,12 @@ export default function HomePage() {
             <div className="w-96 h-96 bg-white rounded-full absolute -right-20 -top-20" />
             <div className="w-64 h-64 bg-white rounded-full absolute -right-10 bottom-0" />
           </div>
-        </motion.div>
+        </m.div>
       </section>
 
       {/* ── Trending ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-16">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -220,7 +222,7 @@ export default function HomePage() {
           <Link href="/shop" className="text-purple-600 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
             View All <ChevronRight size={14} />
           </Link>
-        </motion.div>
+        </m.div>
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {trending.slice(0, 4).map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
@@ -230,13 +232,13 @@ export default function HomePage() {
 
       {/* ── Customer Reviews ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-4">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
+        <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
           <div className="flex justify-center gap-1 mb-3">
             {[...Array(5)].map((_, i) => <Star key={i} size={18} className="fill-yellow-400 text-yellow-400" />)}
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">What Our Customers Say</h2>
           <p className="text-gray-500 text-sm mt-2">Real reviews from verified buyers</p>
-        </motion.div>
+        </m.div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {[
             { name: 'Sarah Mitchell', location: 'New York, US', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face', rating: 5, product: 'Vitamin C Serum', text: 'Absolutely love this serum! My skin has never looked better. The packaging is premium and it arrived super fast. Will definitely be ordering again.', date: 'Jun 14, 2026' },
@@ -244,13 +246,13 @@ export default function HomePage() {
             { name: 'Priya Nair', location: 'Sydney, AU', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=80&h=80&fit=crop&crop=face', rating: 5, product: 'Yoga Mat Premium', text: 'The grip is incredible and it has held up through 3 months of daily hot yoga. The alignment lines are actually useful. Worth every cent.', date: 'May 29, 2026' },
             { name: 'Carlos Rivera', location: 'Toronto, CA', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face', rating: 4, product: 'Pro Gym Duffle Bag', text: 'Huge bag with great compartments. The shoe pocket is a game-changer. Only minor thing is I wish it came in more colours, but overall a fantastic buy.', date: 'Jun 1, 2026' },
             { name: 'Aisha Patel', location: 'Dubai, UAE', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face', rating: 5, product: 'Modern Accent Chair', text: 'This chair transformed my living room. The velvet is incredibly soft and the colour is exactly as shown. Assembly took 10 minutes. Delivery was faster than expected!', date: 'May 20, 2026' },
-            { name: 'Daniel Lee', location: 'Seoul, KR', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face', rating: 5, product: 'AirPods Pro Headphones', text: 'Insane noise cancellation. I wear these on my commute daily and I forget the rest of the world exists. Sound quality is crisp and the mic is clear on calls.', date: 'Jun 18, 2026' },
+            { name: 'Daniel Lee', location: 'Seoul, KR', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face', rating: 5, product: 'AirPods Pro Headphones', text: 'Insane noise cancellation. I wear these on my commute every day and forget the rest of the world exists. Sound quality is crisp and the mic is clear on calls.', date: 'Jun 18, 2026' },
           ].map((r, i) => (
-            <motion.div key={r.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+            <m.div key={r.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
               className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col gap-3">
               <div className="flex items-center gap-3">
                 <div className="relative w-11 h-11 rounded-xl overflow-hidden flex-shrink-0">
-                  <Image src={r.avatar} alt={r.name} fill className="object-cover" />
+                  <Image src={r.avatar} alt={r.name} fill sizes="44px" className="object-cover" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-bold text-gray-900">{r.name}</p>
@@ -260,14 +262,14 @@ export default function HomePage() {
                   {[...Array(5)].map((_, j) => <Star key={j} size={11} className={j < r.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200'} />)}
                 </div>
               </div>
-              <p className="text-xs text-gray-500 leading-relaxed flex-1">"{r.text}"</p>
+              <p className="text-xs text-gray-500 leading-relaxed flex-1">&ldquo;{r.text}&rdquo;</p>
               <div className="flex items-center justify-between pt-1 border-t border-gray-50">
                 <span className="text-xs font-medium text-purple-600">{r.product}</span>
                 <span className="text-xs text-gray-400 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" /> Verified · {r.date}
                 </span>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </section>
@@ -275,7 +277,7 @@ export default function HomePage() {
       {/* ── Social Proof ── */}
       <section className="bg-white border-t border-gray-100 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -301,7 +303,7 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </section>
     </div>

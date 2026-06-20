@@ -1,12 +1,12 @@
 'use client';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useCarouselStore } from '@/lib/store';
 
 const DRAG_THRESHOLD = 40;
 const WHEEL_THRESHOLD = 30;
-const WHEEL_COOLDOWN = 600; // ms between trackpad-triggered slides
+const WHEEL_COOLDOWN = 600;
 
 export default function HeroCarousel() {
   const { items, interval } = useCarouselStore();
@@ -37,7 +37,6 @@ export default function HeroCarousel() {
     else if (swipe > DRAG_THRESHOLD) { go(-1); resetAutoplay(); }
   };
 
-  // Trackpad two-finger horizontal swipe
   const handleWheel = useCallback((e: React.WheelEvent) => {
     const now = Date.now();
     if (Math.abs(e.deltaX) < WHEEL_THRESHOLD) return;
@@ -69,7 +68,7 @@ export default function HeroCarousel() {
 
       {/* Animated product image */}
       <AnimatePresence mode="sync" custom={dir}>
-        <motion.div
+        <m.div
           key={current.id}
           custom={dir}
           variants={variants}
@@ -88,12 +87,13 @@ export default function HeroCarousel() {
               src={current.image}
               alt={current.label ?? 'Product'}
               fill
+              sizes="(max-width: 1024px) 50vw, 60vw"
               className="object-contain drop-shadow-2xl"
               priority
               draggable={false}
             />
           </div>
-        </motion.div>
+        </m.div>
       </AnimatePresence>
 
       {/* Badge */}

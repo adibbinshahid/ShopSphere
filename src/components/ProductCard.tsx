@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ShoppingCart, Star, Heart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -24,7 +24,6 @@ export default function ProductCard({ product, index = 0 }: Props) {
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
 
-    // fly from button center
     const rect = e.currentTarget.getBoundingClientRect();
     trigger(
       rect.left + rect.width / 2,
@@ -43,14 +42,14 @@ export default function ProductCard({ product, index = 0 }: Props) {
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.08 }}
     >
       <Link href={`/product/${product.id}`}>
-        <motion.div
+        <m.div
           whileHover={{ y: -4 }}
           transition={{ type: 'spring', stiffness: 300 }}
           className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100"
@@ -61,6 +60,7 @@ export default function ProductCard({ product, index = 0 }: Props) {
               src={product.image}
               alt={product.name}
               fill
+              sizes="(max-width: 1024px) 50vw, 25vw"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             {product.badge && (
@@ -99,7 +99,7 @@ export default function ProductCard({ product, index = 0 }: Props) {
                   <span className="text-xs text-gray-400 line-through">${product.originalPrice.toFixed(2)}</span>
                 )}
               </div>
-              <motion.button
+              <m.button
                 whileTap={{ scale: 0.85 }}
                 onClick={handleAdd}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${
@@ -108,11 +108,11 @@ export default function ProductCard({ product, index = 0 }: Props) {
               >
                 <ShoppingCart size={13} />
                 {added ? 'Added!' : 'Add'}
-              </motion.button>
+              </m.button>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </Link>
-    </motion.div>
+    </m.div>
   );
 }

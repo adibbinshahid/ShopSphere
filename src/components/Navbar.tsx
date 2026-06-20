@@ -3,11 +3,13 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { ShoppingCart, Search, User, Menu, X, ShoppingBag, LogOut, Package, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import dynamic from 'next/dynamic';
+import { m, AnimatePresence } from 'framer-motion';
 import { useCartStore, useUserStore } from '@/lib/store';
-import CartDrawer from './CartDrawer';
-import SearchModal from './SearchModal';
 import Image from 'next/image';
+
+const CartDrawer = dynamic(() => import('./CartDrawer'));
+const SearchModal = dynamic(() => import('./SearchModal'));
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -38,7 +40,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  // Close user menu on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
@@ -57,7 +58,7 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
+      <m.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-white shadow-sm'
         }`}
@@ -69,10 +70,10 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <motion.div whileHover={{ scale: 1.05 }}
+              <m.div whileHover={{ scale: 1.05 }}
                 className="w-9 h-9 bg-purple-600 rounded-xl flex items-center justify-center">
                 <ShoppingBag size={18} className="text-white" />
-              </motion.div>
+              </m.div>
               <span className="text-xl font-bold text-gray-900 group-hover:text-purple-600 transition-colors">ShopSphere</span>
             </Link>
 
@@ -83,7 +84,7 @@ export default function Navbar() {
                   className="relative px-4 py-2 text-sm font-medium text-gray-600 hover:text-purple-600 transition-colors focus:outline-none">
                   {link.label}
                   {pathname === link.href && (
-                    <motion.div layoutId="nav-underline"
+                    <m.div layoutId="nav-underline"
                       className="absolute bottom-0 left-4 right-4 h-0.5 bg-purple-600 rounded-full" />
                   )}
                 </Link>
@@ -92,15 +93,15 @@ export default function Navbar() {
 
             {/* Actions */}
             <div className="flex items-center gap-2">
-              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+              <m.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 onClick={() => setSearchOpen(true)}
                 className="p-2 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-xl transition-colors">
                 <Search size={20} />
-              </motion.button>
+              </m.button>
 
               {/* User button / dropdown */}
               <div ref={userMenuRef} className="relative hidden sm:block">
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                <m.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                   onClick={() => mounted && isLoggedIn ? setUserMenuOpen(!userMenuOpen) : router.push('/account')}
                   className={`flex items-center gap-1.5 p-2 rounded-xl transition-colors ${
                     isLoggedIn ? 'hover:bg-purple-50 text-purple-600' : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'
@@ -108,7 +109,7 @@ export default function Navbar() {
                   {mounted && isLoggedIn && user ? (
                     <>
                       <div className="relative w-7 h-7 rounded-lg overflow-hidden">
-                        <Image src={user.avatar} alt={user.name} fill className="object-cover" />
+                        <Image src={user.avatar} alt={user.name} fill className="object-cover" sizes="28px" />
                       </div>
                       <span className="text-xs font-semibold max-w-[80px] truncate hidden lg:block">{user.name.split(' ')[0]}</span>
                       <ChevronDown size={13} className={`transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} />
@@ -116,11 +117,11 @@ export default function Navbar() {
                   ) : (
                     <User size={20} />
                   )}
-                </motion.button>
+                </m.button>
 
                 <AnimatePresence>
                   {userMenuOpen && isLoggedIn && user && (
-                    <motion.div
+                    <m.div
                       initial={{ opacity: 0, y: 8, scale: 0.96 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
@@ -147,31 +148,31 @@ export default function Navbar() {
                         className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 transition-colors border-t border-gray-100">
                         <LogOut size={15} /> Sign Out
                       </button>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
               </div>
 
-              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+              <m.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 id="navbar-cart-btn"
                 onClick={toggleCart}
                 className="relative p-2 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-xl transition-colors">
                 <ShoppingCart size={20} />
                 <AnimatePresence>
                   {mounted && count > 0 && (
-                    <motion.span key="badge" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
+                    <m.span key="badge" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
                       className="absolute -top-1 -right-1 w-5 h-5 bg-purple-600 text-white text-xs rounded-full flex items-center justify-center font-bold">
                       {count > 9 ? '9+' : count}
-                    </motion.span>
+                    </m.span>
                   )}
                 </AnimatePresence>
-              </motion.button>
+              </m.button>
 
-              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+              <m.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className="md:hidden p-2 text-gray-600 hover:text-purple-600 rounded-xl">
                 {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-              </motion.button>
+              </m.button>
             </div>
           </div>
         </div>
@@ -179,7 +180,7 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <AnimatePresence>
           {mobileOpen && (
-            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}
+            <m.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               className="md:hidden border-t border-gray-100 bg-white overflow-hidden">
               <div className="px-4 py-4 space-y-1">
@@ -196,10 +197,10 @@ export default function Navbar() {
                   {isLoggedIn ? 'My Account' : 'Sign In'}
                 </Link>
               </div>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
-      </motion.nav>
+      </m.nav>
 
       <CartDrawer />
       <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
