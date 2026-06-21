@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { LazyMotion, domAnimation } from 'framer-motion';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import FloatingDemoButtons from './FloatingDemoButtons';
 
 const CartFeedback = dynamic(() => import('./CartFeedback'));
 
@@ -23,6 +24,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
       <main className="pt-20 md:pt-24">{children}</main>
       <Footer />
       <CartFeedback />
+      <FloatingDemoButtons />
     </LazyMotion>
   );
 }
