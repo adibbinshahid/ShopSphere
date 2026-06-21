@@ -8,10 +8,13 @@ export default function FloatingDemoButtons() {
       {/* Admin Panel */}
       <Link
         href="/admin"
-        className="flex items-center gap-3 bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg rounded-full pl-2 pr-4 py-2 hover:shadow-xl hover:scale-[1.03] transition-all duration-200 group w-[188px]"
+        className="flex items-center gap-3 bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg rounded-full pl-1.5 pr-4 py-1.5 hover:shadow-xl hover:scale-[1.03] transition-all duration-200 group w-[188px]"
       >
-        <div className="w-9 h-9 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center flex-shrink-0">
-          <ShieldCheck size={16} className="text-amber-600" strokeWidth={2} />
+        {/* outer beige ring → inner gold circle */}
+        <div className="w-[44px] h-[44px] rounded-full bg-[#ede8db] flex items-center justify-center flex-shrink-0">
+          <div className="w-[34px] h-[34px] rounded-full bg-[#c9a84c] flex items-center justify-center">
+            <ShieldCheck size={16} className="text-white" strokeWidth={2.5} />
+          </div>
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-[9px] font-semibold uppercase tracking-widest text-gray-400 leading-none mb-0.5">Experience the</p>
@@ -25,11 +28,13 @@ export default function FloatingDemoButtons() {
         href="https://www.fiverr.com/adib_bin_shahid"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-3 bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg rounded-full pl-2 pr-4 py-2 hover:shadow-xl hover:scale-[1.03] transition-all duration-200 group w-[188px]"
+        className="flex items-center gap-3 bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg rounded-full pl-1.5 pr-4 py-1.5 hover:shadow-xl hover:scale-[1.03] transition-all duration-200 group w-[188px]"
       >
-        <div className="w-9 h-9 rounded-full bg-[#1DBF73] flex items-center justify-center flex-shrink-0">
-          <span className="text-white font-black text-[15px] leading-none" style={{ fontFamily: 'system-ui, sans-serif' }}>f</span>
-          <span className="text-white font-black text-[9px] leading-none -ml-0.5 mt-1">•</span>
+        {/* outer mint ring → inner fiverr green circle */}
+        <div className="w-[44px] h-[44px] rounded-full bg-[#cde9d8] flex items-center justify-center flex-shrink-0">
+          <div className="w-[34px] h-[34px] rounded-full bg-[#1DBF73] flex items-center justify-center">
+            <span className="text-white font-black text-[9px] leading-none tracking-tight">fiverr.</span>
+          </div>
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-[9px] font-semibold uppercase tracking-widest text-gray-400 leading-none mb-0.5">Contact us on</p>
