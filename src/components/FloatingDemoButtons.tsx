@@ -8,7 +8,7 @@ export default function FloatingDemoButtons() {
       {/* Admin Panel */}
       <Link
         href="/admin"
-        className="flex items-center gap-3 bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg rounded-full pl-1.5 pr-4 py-1.5 hover:shadow-xl hover:scale-[1.03] transition-all duration-200 group w-[188px]"
+        className="flex items-center gap-3 bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg rounded-full pl-1.5 pr-4 py-1.5 hover:shadow-xl hover:scale-[1.03] transition-all duration-200 group w-[210px]"
       >
         {/* outer beige ring → inner gold circle */}
         <div className="w-[44px] h-[44px] rounded-full bg-[#ede8db] flex items-center justify-center flex-shrink-0">
@@ -17,7 +17,7 @@ export default function FloatingDemoButtons() {
           </div>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-[9px] font-semibold uppercase tracking-widest text-gray-400 leading-none mb-0.5">Experience the</p>
+          <p className="text-[9px] font-semibold uppercase tracking-wider text-gray-400 leading-none mb-0.5 whitespace-nowrap">Experience the</p>
           <p className="text-[13px] font-bold text-gray-900 leading-none">Admin Panel</p>
         </div>
         <ArrowRight size={13} className="text-gray-400 group-hover:text-gray-700 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
@@ -28,7 +28,7 @@ export default function FloatingDemoButtons() {
         href="https://www.fiverr.com/adib_bin_shahid"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-3 bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg rounded-full pl-1.5 pr-4 py-1.5 hover:shadow-xl hover:scale-[1.03] transition-all duration-200 group w-[188px]"
+        className="flex items-center gap-3 bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg rounded-full pl-1.5 pr-4 py-1.5 hover:shadow-xl hover:scale-[1.03] transition-all duration-200 group w-[210px]"
       >
         {/* outer mint ring → inner fiverr green circle */}
         <div className="w-[44px] h-[44px] rounded-full bg-[#cde9d8] flex items-center justify-center flex-shrink-0">
@@ -37,7 +37,7 @@ export default function FloatingDemoButtons() {
           </div>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-[9px] font-semibold uppercase tracking-widest text-gray-400 leading-none mb-0.5">Contact us on</p>
+          <p className="text-[9px] font-semibold uppercase tracking-wider text-gray-400 leading-none mb-0.5 whitespace-nowrap">Contact us on</p>
           <p className="text-[13px] font-bold text-gray-900 leading-none">Fiverr</p>
         </div>
         <ArrowRight size={13} className="text-gray-400 group-hover:text-gray-700 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
