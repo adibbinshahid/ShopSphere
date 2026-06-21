@@ -71,6 +71,9 @@ function LoginGate() {
               Sign In →
             </button>
           </form>
+          <Link href="/" className="flex items-center justify-center gap-1.5 mt-5 text-xs text-gray-400 hover:text-gray-600 transition-colors">
+            <ChevronLeft size={13} /> Back to Homepage
+          </Link>
         </div>
       </motion.div>
     </div>
